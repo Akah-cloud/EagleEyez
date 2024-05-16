@@ -1,4 +1,4 @@
-body {
+.body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     display: flex;
@@ -59,16 +59,8 @@ h2 {
     background-color: #0056b3;
 }
 
+/*login*/
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
 .login-container {
     background-color: #fff;
     padding: 40px;
