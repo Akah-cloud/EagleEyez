@@ -2,3 +2,7 @@ body {
     margin: auto;
     padding: auto;
 }
+
+li {
+    list-style: none;
+}
