@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Community Space</title>
+</head>
+<body class="com_body">
+    <nav class="navbar">
+        <div class="navbar__container">
+            <a href="/Home.html" id="navbar__logo">
+                <img src="/images/logo.png" alt="city of Cape Town logo" class="ct-logo">
+            </a>
+            <div class="navbar__toggle" id="mobile-menu">
+            <span class="bar"></span> <span class="bar"></span>
+            <span class="bar"></span>
+            </div>
+        <ul class="navbar__menu">
+        <li class="navbar__item">
+            <a href="/community.html" class="navbar__links">Community</a>
+        </li>
+        <li class="navbar__item">
+            <a href="/News.html" class="navbar__links">News</a>
+        </li>
+        <li class="navbar__item">
+            <a href="/" class="navbar__links">About Us</a>
+        </li>
+        <li class="navbar__btn"><a href="/login.html" class="button">Login</a>
+        </li>
+        </ul>
+        </div>
+     </nav>
+     <div class="com_container">
+        
+        <div class="post-news">
+            <h3>Post something...</h3>
+            <input type="text" id="newsTitle" placeholder="News Title">
+            <textarea id="newsSummary" placeholder="News Summary"></textarea>
+            <input type="file" id="newsMedia" accept="image/*,video/*,.pdf,.doc,.docx,.xls,.xlsx">
+            <button class="news-btn"onclick="postNews()">Post News</button>
+        </div>
+        <div>
+            <ul id="newsList"></ul>
+        </div>
+    </div>
+
+    <div class="popup" id="newsPopup">
+        <span class="close-btn" onclick="closePopup()">×</span>
+        <h3 id="popupTitle">Education News Title</h3>
+        <p id="popupSummary">More detailed information about the news...</p>
+        <div id="popupMedia" class="media"></div>
+        <div class="actions">
+            <button id="likeButton" onclick="likePost()">Like <span class="like-count">0</span></button>
+            <button onclick="sharePost()">Share</button>
+            <button onclick="commentPost()">Comment</button>
+        </div>
+        <div class="comments" id="popupComments"></div>
+    </div>
+
+    <script>
+        let posts = [];
+        let currentPostId = null;
+
+        function closePopup() {
+            document.getElementById('newsPopup').style.display = 'none';
+        }
+
+        function openPopup(id) {
+            const post = posts.find(p => p.id === id);
+            currentPostId = id;
+
+            document.getElementById('popupTitle').innerText = post.title;
+            document.getElementById('popupSummary').innerText = post.summary;
+
+            let mediaContainer = document.getElementById('popupMedia');
+            mediaContainer.innerHTML = '';
+
+            if (post.media !== null) {
+                let mediaElement;
+                if (post.media.startsWith('blob:')) {
+                    mediaElement = document.createElement('img');
+                    mediaElement.src = post.media;
+                } else if (post.media.startsWith('video/')) {
+                    mediaElement = document.createElement('video');
+                    mediaElement.controls = true;
+                    mediaElement.src = post.media;
+                } else if (post.media.endsWith('.pdf') || post.media.endsWith('.doc') || post.media.endsWith('.docx') || post.media.endsWith('.xls') || post.media.endsWith('.xlsx')) {
+                    mediaElement = document.createElement('a');
+                    mediaElement.href = post.media;
+                    mediaElement.textContent = 'View Document';
+                    mediaElement.target = '_blank';
+                } else {
+                    mediaElement = document.createElement('img');
+                    mediaElement.src = post.media;
+                }
+                mediaContainer.appendChild(mediaElement);
+            }
+
+            document.querySelector('#newsPopup .like-count').innerText = post.likes;
+            document.getElementById('popupComments').innerHTML = post.comments.map(comment => `
+                <div class="comment">
+                    <p><strong>${comment.user}:</strong> ${comment.text}</p>
+                    <div class="comment-actions">
+                        <button onclick="likeComment(${id}, ${comment.id})">Like <span class="like-count">${comment.likes}</span></button>
+                        <button onclick="replyComment(${id}, ${comment.id})">Reply</button>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('newsPopup').style.display = 'block';
+        }
+
+        function likePost() {
+            const post = posts.find(p => p.id === currentPostId);
+            post.likes++;
+            document.querySelector('#newsPopup .like-count').innerText = post.likes;
+        }
+
+        function sharePost() {
+            alert('You shared this post!');
+        }
+
+        function commentPost() {
+            let commentText = prompt('Enter your comment:');
+            if (commentText) {
+                const post = posts.find(p => p.id === currentPostId);
+                const commentId = post.comments.length + 1;
+                post.comments.push({ id: commentId, user: 'You', text: commentText, likes: 0 });
+
+                let commentSection = document.getElementById('popupComments');
+                let newComment = document.createElement('div');
+                newComment.classList.add('comment');
+                newComment.innerHTML = `
+                    <p><strong>You:</strong> ${commentText}</p>
+                    <div class="comment-actions">
+                        <button onclick="likeComment(${currentPostId}, ${commentId})">Like <span class="like-count">0</span></button>
+                        <button onclick="replyComment(${currentPostId}, ${commentId})">Reply</button>
+                    </div>
+                `;
+                commentSection.appendChild(newComment);
+            }
+        }
+
+        function likeComment(postId, commentId) {
+            const post = posts.find(p => p.id === postId);
+            const comment = post.comments.find(c => c.id === commentId);
+            comment.likes++;
+            document.querySelector(`#newsPopup .comment-actions [onclick="likeComment(${postId}, ${commentId})"] .like-count`).innerText = comment.likes;
+        }
+
+        function shareComment(postId, commentId) {
+            alert('You shared this comment!');
+        }
+
+        function replyComment(postId, commentId) {
+            let replyText = prompt('Enter your reply:');
+            if (replyText) {
+                const post = posts.find(p => p.id === postId);
+                const comment = post.comments.find(c => c.id === commentId);
+                const replyId = comment.replies ? comment.replies.length + 1 : 1;
+                if (!comment.replies) comment.replies = [];
+                comment.replies.push({ id: replyId, user: 'You', text: replyText });
+
+                let commentElement = document.querySelector(`#newsPopup .comment [onclick="replyComment(${postId}, ${commentId})"]`).closest('.comment');
+                let newReply = document.createElement('div');
+                newReply.classList.add('comment');
+                newReply.innerHTML = `<p><strong>You:</strong> ${replyText}</p>`;
+                commentElement.appendChild(newReply);
+            }
+        }
+
+        function postNews() {
+            let title = document.getElementById('newsTitle').value;
+            let summary = document.getElementById('newsSummary').value;
+            let mediaFile = document.getElementById('newsMedia').files[0];
+
+            if (title && summary) {
+                let mediaUrl = null;
+                if (mediaFile) {
+                    mediaUrl = URL.createObjectURL(mediaFile);
+                }
+                let newPost = {
+                    id: posts.length + 1,
+                    title: title,
+                    summary: summary,
+                    media: mediaUrl, // Set mediaUrl to null if no file is selected
+                    likes: 0,
+                    comments: []
+                };
+                posts.push(newPost);
+                renderPosts();
+                document.getElementById('newsTitle').value = '';
+                document.getElementById('newsSummary').value = '';
+                document.getElementById('newsMedia').value = '';
+            } else {
+                alert('Please fill out both the title and summary.');
+            }
+        }
+
+        function renderPosts() {
+            let newsList = document.getElementById('newsList');
+            newsList.innerHTML = '';
+            posts.forEach(post => {
+                let newNewsItem = document.createElement('li');
+                newNewsItem.innerHTML = `
+                    <div class="card" onclick="openPopup(${post.id})">
+                        <h3>${post.title}</h3>
+                        <p>${post.summary}</p>
+                    </div>`;
+                newsList.appendChild(newNewsItem);
+            });
+        }
+
+        renderPosts();
+    </script>
+</body>
+</html>
