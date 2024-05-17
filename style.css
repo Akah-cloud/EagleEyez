@@ -210,6 +210,7 @@
    width: 560px; /* Adjust width as needed */
    height: 315px; /* Adjust height as needed */
    margin: auto;
+   max-width: fit-content;
 }
 
 .container {
