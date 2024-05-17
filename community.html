@@ -5,19 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Education News</title>
+    <title>community space</title>
 </head>
 
-<body>
+<body class="com_body">
     <div>
         <ul>
-            <li>City of Cape Town</li>
+            <a href="/Home.html" id="navbar__logo">
+                <img src="/images/logo.png" alt="city of Cape Town logo" class="ct-logo">
+            </a>
             <li>Login</li>
         </ul>
         <div class="search-bar">
             <input type="text" placeholder="Search: location, topic">
         </div>
         <div class="post-news">
+            <h3>Post something</h3>
             <input type="text" id="newsTitle" placeholder="News Title">
             <textarea id="newsSummary" placeholder="News Summary"></textarea>
             <input type="file" id="newsMedia" accept="image/*,video/*,.pdf,.doc,.docx,.xls,.xlsx">
@@ -35,7 +38,6 @@
         <div id="popupMedia" class="media"></div>
         <div class="actions">
             <button onclick="likePost()">Like <span class="like-count">0</span></button>
-            <button onclick="sharePost()">Share</button>
             <button onclick="commentPost()">Comment</button>
         </div>
         <div class="comments" id="popupComments"></div>
@@ -103,7 +105,6 @@
                     <p><strong>You:</strong> ${comment}</p>
                     <div class="comment-actions">
                         <button onclick="likeComment(this)">Like <span class="like-count">0</span></button>
-                        <button onclick="shareComment(this)">Share</button>
                         <button onclick="replyComment(this)">Reply</button>
                     </div>
                 `;
@@ -119,9 +120,7 @@
             alert('You liked this comment!');
         }
 
-        function shareComment(button) {
-            alert('You shared this comment!');
-        }
+    
 
         function replyComment(button) {
             let reply = prompt('Enter your reply:');
