@@ -5,23 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Education News</title>
+    <title>community space</title>
 </head>
 
-<body>
-    <div>
-        <ul>
-            <li>City of Cape Town</li>
-            <li>Login</li>
+<body class="com_body">
+    <nav class="navbar">
+        <div class="navbar__container">
+            <a href="/Home.html" id="navbar__logo">
+                <img src="/images/logo.png" alt="city of Cape Town logo" class="ct-logo">
+            </a>
+            <div class="navbar__toggle" id="mobile-menu">
+            <span class="bar"></span> <span class="bar"></span>
+            <span class="bar"></span>
+            </div>
+        <ul class="navbar__menu">
+        <li class="navbar__item">
+            <a href="/community.html" class="navbar__links">Community</a>
+        </li>
+        <li class="navbar__item">
+            <a href="/News.html" class="navbar__links">News</a>
+        </li>
+        <li class="navbar__item">
+            <a href="/" class="navbar__links">About Us</a>
+        </li>
+        <li class="navbar__btn"><a href="/login.html" class="button">Login</a>
+        </li>
         </ul>
-        <div class="search-bar">
-            <input type="text" placeholder="Search: location, topic">
         </div>
+     </nav>
+    <div class="com_container">
+        
         <div class="post-news">
+            <div class="search-bar">
+                <input type="text" placeholder="Search: location, topic">
+            </div>
+            <h3>Post something...</h3>
             <input type="text" id="newsTitle" placeholder="News Title">
             <textarea id="newsSummary" placeholder="News Summary"></textarea>
             <input type="file" id="newsMedia" accept="image/*,video/*,.pdf,.doc,.docx,.xls,.xlsx">
-            <button onclick="postNews()">Post News</button>
+            <button class="news-btn"onclick="postNews()">Post News</button>
         </div>
         <div>
             <ul id="newsList"></ul>
@@ -35,7 +57,6 @@
         <div id="popupMedia" class="media"></div>
         <div class="actions">
             <button onclick="likePost()">Like <span class="like-count">0</span></button>
-            <button onclick="sharePost()">Share</button>
             <button onclick="commentPost()">Comment</button>
         </div>
         <div class="comments" id="popupComments"></div>
@@ -103,7 +124,6 @@
                     <p><strong>You:</strong> ${comment}</p>
                     <div class="comment-actions">
                         <button onclick="likeComment(this)">Like <span class="like-count">0</span></button>
-                        <button onclick="shareComment(this)">Share</button>
                         <button onclick="replyComment(this)">Reply</button>
                     </div>
                 `;
@@ -119,9 +139,7 @@
             alert('You liked this comment!');
         }
 
-        function shareComment(button) {
-            alert('You shared this comment!');
-        }
+    
 
         function replyComment(button) {
             let reply = prompt('Enter your reply:');
