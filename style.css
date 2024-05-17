@@ -202,8 +202,14 @@
    position: relative;
    width: 560px; /* Adjust width as needed */
    height: 315px; /* Adjust height as needed */
-   margin-left: 50px; /* Adjust left margin as needed */
-   margin-top: 50px; /* Adjust top margin as needed */
+   margin: auto;
+}
+
+.links {
+   position: relative;
+   width: 560px; /* Adjust width as needed */
+   height: 315px; /* Adjust height as needed */
+   margin: auto;
 }
 
 .container {
@@ -232,10 +238,7 @@
    margin-right: 0;
 }
 
-.links {
-   margin-left: 50px;
-   margin-right: 10px;
-}
+
 /*footer css*/
 .footer__container {
    background-color: #141414;
