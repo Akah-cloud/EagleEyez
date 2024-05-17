@@ -95,3 +95,62 @@ menu.addEventListener('click', function() {
     menu.classList.toggle('is-active');
     menuLinks.classList.toggle('active');
 });
+
+/* registration */
+document.addEventListener('DOMContentLoaded', function() {
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+    const form = document.getElementById('registration-form');
+    const feedbackMessage = document.getElementById('passwordFeedback');
+
+    function assessPasswordStrength(password) {
+        const hasUppercase = /[A-Z]/.test(password);
+        const hasLowercase = /[a-z]/.test(password);
+        const hasNumber = /\d/.test(password);
+        const hasSpecialChar = /[^a-zA-Z\d]/.test(password);
+        
+        let feedbackText = "Password is ";
+        let strength = "weak";
+
+        if (password.length <= 10 && hasUppercase && hasLowercase && hasNumber && hasSpecialChar) {
+            strength = "strong";
+            feedbackText += "Strong.";
+        } else if (password.length <= 10 && (hasUppercase || hasLowercase || hasNumber || hasSpecialChar)) {
+            strength = "good";
+            feedbackText += "Good.";
+        } else if (password.length <= 10) {
+            feedbackText += "Weak. Please include uppercase letters, lowercase letters, numbers, and special characters.";
+        } else {
+            feedbackText += "Password shouldn't be more than 10 characters.";
+        }
+
+        return { feedbackText, className: strength };
+    }
+
+    function validatePassword() {
+        const password = passwordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+        const feedback = assessPasswordStrength(password);
+    
+        if (password !== confirmPassword) {
+            feedback.feedbackText += " Passwords do not match.";
+            feedback.className = 'weak';
+        }
+    
+        feedbackMessage.textContent = feedback.feedbackText;
+        feedbackMessage.className = feedback.className;
+    }
+
+    passwordInput.addEventListener('input', validatePassword);
+    confirmPasswordInput.addEventListener('input', validatePassword);
+
+    form.addEventListener('submit', function(event) {
+        const password = passwordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+
+        if (password.length > 10 || password !== confirmPassword) {
+            event.preventDefault();
+            alert('Your password does not meet the criteria or passwords do not match.');
+        }
+    });
+});
