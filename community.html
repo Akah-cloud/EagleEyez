@@ -9,22 +9,41 @@
 </head>
 
 <body class="com_body">
-    <div>
-        <ul>
+    <nav class="navbar">
+        <div class="navbar__container">
             <a href="/Home.html" id="navbar__logo">
                 <img src="/images/logo.png" alt="city of Cape Town logo" class="ct-logo">
             </a>
-            <li>Login</li>
+            <div class="navbar__toggle" id="mobile-menu">
+            <span class="bar"></span> <span class="bar"></span>
+            <span class="bar"></span>
+            </div>
+        <ul class="navbar__menu">
+        <li class="navbar__item">
+            <a href="/community.html" class="navbar__links">Community</a>
+        </li>
+        <li class="navbar__item">
+            <a href="/News.html" class="navbar__links">News</a>
+        </li>
+        <li class="navbar__item">
+            <a href="/" class="navbar__links">About Us</a>
+        </li>
+        <li class="navbar__btn"><a href="/login.html" class="button">Login</a>
+        </li>
         </ul>
-        <div class="search-bar">
-            <input type="text" placeholder="Search: location, topic">
         </div>
+     </nav>
+    <div class="com_container">
+        
         <div class="post-news">
-            <h3>Post something</h3>
+            <div class="search-bar">
+                <input type="text" placeholder="Search: location, topic">
+            </div>
+            <h3>Post something...</h3>
             <input type="text" id="newsTitle" placeholder="News Title">
             <textarea id="newsSummary" placeholder="News Summary"></textarea>
             <input type="file" id="newsMedia" accept="image/*,video/*,.pdf,.doc,.docx,.xls,.xlsx">
-            <button onclick="postNews()">Post News</button>
+            <button class="news-btn"onclick="postNews()">Post News</button>
         </div>
         <div>
             <ul id="newsList"></ul>
