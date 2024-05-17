@@ -507,3 +507,16 @@ li {
 .ct-logo {
    width: 100px;
 } 
+
+
+.whatsapp-icon {
+   position: fixed;
+   bottom: 20px;
+   right: 40px;
+   z-index: 1000;
+}
+
+.whatsapp-icon-img {
+   width: 100px;
+   height: 100px;
+}
