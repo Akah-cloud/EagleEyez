@@ -3,30 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Page with Slideshow</title>
+    <title>News Page</title>
     <style>
-        /* Your CSS styles for the slideshow and page layout */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fbfbfb;
+            /* Set background image and make it cover the entire viewport */
+            background-image: url('images/View2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            /* Ensure content is visible on top of the background */
+            color: #000;
+        }
+        .container {
+            width: auto;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .news-list{
+            width: auto;
+            align-items: center;
+        }
+        .article {
+            margin-left: 200px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+            text-align: justify; /* Justify the text */
+            max-width: 50%; /* Set maximum width to match the image width */
+        }
+
+        .article h1 {
+            margin-top: 0;
+        }
+
+        .article img {
+            width: 100%; /* Adjust image width */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 30px; /* Add some space below the image */
+        }
+
+        /* Responsive Styling */
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .article {
+                margin-bottom: 10px;
+                padding-bottom: 10px;
+                max-width: 100%; /* Set maximum width to 100% on smaller screens */
+            }
+            .article img {
+                width: 100%; /* Make image full width on smaller screens */
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>Western Cape transport department sounds alarm over extortion in taxi industry</h1>
-
-    <!-- Slideshow container -->
-    <div class="slideshow-container">
-        <div class="mySlides fade">
-            <img src="TaxiCPT.webp" alt="South Africa 1" style="width:50%">
-        </div>
-       <p2>The Western Cape transport department on Thursday called the SA National Taxi Council (Santaco) to an urgent meeting regarding extortion in some sectors of the taxi industry.
+   <div class="container">
+       <div id="news-list">
+           <div class="article">
+               <h1>Western Cape transport department sounds alarm over extortion in taxi industry</h1>
+               <img src="images\TaxiCPT.webp" alt="South Africa 1">
+               <p>The Western Cape transport department on Thursday called the SA National Taxi Council (Santaco) to an urgent meeting regarding extortion in some sectors of the taxi industry.
 
         The province's Transport MEC Daylin Mitchell said:
         
         My office has been inundated with complaints from victims of extortion, such as private companies and owners, whose vehicles are being stopped by elements within the taxi industry [so-called patrollers], who impose 'fines' or 'release fees' on people when they drive in certain communities.
-        "These crimes are allegedly aligned to both the [Cape Amalgamated Taxi Association] and the [Congress of Democratic Taxi Association]," he said.</p2>
-    </div>
-
-    <!-- JavaScript for slideshow -->
-    <script>
-        // JavaScript code for the slideshow
-    </script>
+        "These crimes are allegedly aligned to both the [Cape Amalgamated Taxi Association] and the [Congress of Democratic Taxi Association]," he said.</p>
+           </div>
+        </div>
+    </div> 
 </body>
 </html>

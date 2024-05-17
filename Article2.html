@@ -3,31 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Page with Slideshow</title>
+    <title>News Page</title>
     <style>
-        /* Your CSS styles for the slideshow and page layout */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fbfbfb;
+            /* Set background image and make it cover the entire viewport */
+            background-image: url('images/View3.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            /* Ensure content is visible on top of the background */
+            color: #000;
+        }
+        .container {
+            width: auto;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .news-list{
+            width: auto;
+            align-items: center;
+        }
+        .article {
+            margin-left: 200px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+            text-align: justify; /* Justify the text */
+            max-width: 50%; /* Set maximum width to match the image width */
+        }
+
+        .article h1 {
+            margin-top: 0;
+        }
+
+        .article img {
+            width: 100%; /* Adjust image width */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 30px; /* Add some space below the image */
+        }
+
+        /* Responsive Styling */
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .article {
+                margin-bottom: 10px;
+                padding-bottom: 10px;
+                max-width: 100%; /* Set maximum width to 100% on smaller screens */
+            }
+            .article img {
+                width: 100%; /* Make image full width on smaller screens */
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>Woman (21) in Cape Town sexually assaulted, robbed and driven around for hours in e-hailing car</h1>
-
-    <!-- Slideshow container -->
-    <div class="slideshow-container">
-        <div class="mySlides fade">
-            <img src="Crime.webp" alt="South Africa 1" style="width:50%">
-        </div>
-       <p2>A woman (21) was sexually assaulted after allegedly catching a car from an e-hailing company in Cape Town on Friday (10 May).
+   <div class="container">
+       <div id="news-list">
+           <div class="article">
+               <h1>Woman (21) in Cape Town sexually assaulted, robbed and driven around for hours in e-hailing car</h1>
+               <img src="images\Crime.webp" alt="South Africa 1">
+               <p>A woman (21) was sexually assaulted after allegedly catching a car from an e-hailing company in Cape Town on Friday (10 May).
 
         The incident happened at around 21:25 Capt Aubrey Morwenyane, Bellville Police Station’s spokesperson has confirmed.
         
         According to Morwenyane the woman requested the car from her workplace. When the driver arrived, he instructed her to sit in the back seat.
         
-        “While on the road another male came from the boot of the vehicle and sat next to her. He then removed firearm and pointed it at her,” Morwenyane says.</p2>
-    </div>
-
-    <!-- JavaScript for slideshow -->
-    <script>
-        // JavaScript code for the slideshow
-    </script>
+        “While on the road another male came from the boot of the vehicle and sat next to her. He then removed firearm and pointed it at her,” Morwenyane says.</p>
+           </div>
+        </div>
+    </div> 
 </body>
 </html>
