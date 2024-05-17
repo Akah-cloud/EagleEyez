@@ -52,6 +52,7 @@
         <div id="popupMedia" class="media"></div>
         <div class="actions">
             <button id="likeButton" onclick="likePost()">Like <span class="like-count">0</span></button>
+            <button onclick="sharePost()">Share</button>
             <button onclick="commentPost()">Comment</button>
         </div>
         <div class="comments" id="popupComments"></div>
@@ -147,6 +148,9 @@
             document.querySelector(`#newsPopup .comment-actions [onclick="likeComment(${postId}, ${commentId})"] .like-count`).innerText = comment.likes;
         }
 
+        function shareComment(postId, commentId) {
+            alert('You shared this comment!');
+        }
 
         function replyComment(postId, commentId) {
             let replyText = prompt('Enter your reply:');

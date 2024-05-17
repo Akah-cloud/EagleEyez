@@ -507,6 +507,7 @@ li {
 .post-news h3 {
    padding-bottom: 10px;
    font-size: 30px;
+   margin-top: 20px;
 }
 .post-news input,
 .post-news textarea {
